@@ -6,12 +6,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Index</title>
+<title>index</title>
 </head>
 <body>
-<h3>首页</h3>
+<h3>登录</h3>
 <hr/>
-<a href="<c:url value='/web/registerPage.html'/>">register</a>
-
+<a href="<c:url value='/web/toRegister.html'/>">注册用户</a>
+<br/>
+欢迎光临, ${user.username }
 </body>
 </html>

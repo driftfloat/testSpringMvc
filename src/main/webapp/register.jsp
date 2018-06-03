@@ -46,19 +46,14 @@
 	})
 	function addUser() {
 		var registerUrl = "<c:url value='/web/addUser.html'/>";
-		var username = $("#username");
-		var phone = $("#phone");
-		var email = $("#email");
-		var formData = {
-			"username" : username,
-			"phone" : phone,
-			"email" : email
-		};
-// 		alert(registerUrl);
-
-// 		$.post(registerUrl, $("#addUserForm").serialize());
-		
-// 		$.post(registerUrl
+// 		var username = $("#username");
+// 		var phone = $("#phone");
+// 		var email = $("#email");
+// 		var formData = {
+// 			"username" : username,
+// 			"phone" : phone,
+// 			"email" : email
+// 		};
 		$.post(registerUrl
 			,$("#addUserForm").serialize()
 			, function(data) {
@@ -69,19 +64,6 @@
 			}
 		});
 
-// 			$.ajax({
-// 				url : registerUrl,
-// 				dataType : "json",
-// 				data : formData,
-// 				async : true,
-// 				cache : false,
-// 				type : "post",
-// 				success : function(flag) {
-// 				}
-// 			});
-		
-// 		$("#addUserForm")[0].action=registerUrl;
-// 		$("#addUserForm").submit();
 	}
 </script>
 </head>

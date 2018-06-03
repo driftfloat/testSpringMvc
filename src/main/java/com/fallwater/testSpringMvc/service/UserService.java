@@ -7,6 +7,8 @@ import com.fallwater.testSpringMvc.entity.User;
 **/
 
 public interface UserService {
+	int login(User user);
+	User query(User condition);
 	boolean addUser(User user);
 	User getUser(int id);
 }

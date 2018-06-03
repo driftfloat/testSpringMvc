@@ -31,4 +31,20 @@ public class UserServiceImpl implements UserService {
 		return userMapper.selectByPrimaryKey(id);
 	}
 
+	@Override
+	public int login(User user) {
+		Object obj = userMapper.login(user);
+		int rtn = userMapper.login(user);
+		if(rtn>0) {
+			return rtn;
+		}
+		return 0;
+	}
+
+	@Override
+	public User query(User condition) {
+		User user = userMapper.query(condition);
+		return user;
+	}
+
 }

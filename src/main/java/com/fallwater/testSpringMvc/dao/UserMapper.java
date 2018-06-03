@@ -3,6 +3,10 @@ package com.fallwater.testSpringMvc.dao;
 import com.fallwater.testSpringMvc.entity.User;
 
 public interface UserMapper {
+	int login(User user);
+	
+	User query(User user);
+	
     int deleteByPrimaryKey(Integer id);
 
     int insert(User record);
@@ -14,4 +18,6 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+    
+    
 }
