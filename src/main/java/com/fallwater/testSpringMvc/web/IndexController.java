@@ -20,11 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/")
 public class IndexController
 {
-
     private static Logger logger = LoggerFactory.getLogger(IndexController.class);
-
-//    @Resource
-//	private UserAuthorityService userAuthorityService;
     
     @RequestMapping("/index")
     public String index(final HttpServletRequest request,

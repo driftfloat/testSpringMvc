@@ -10,7 +10,7 @@
 			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
     <!-- auto scan package -->
-    <context:component-scan base-package="com.fallwater"></context:component-scan>
+    <context:component-scan base-package="com.fallwater.testSpringMvc"></context:component-scan>
 
     <!-- reference jdbc config file -->
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -23,42 +23,42 @@
     </bean>
 
     <!-- dataSource configer -->
-<!--     <bean id="sampleDataSource" class="org.apache.commons.dbcp.BasicDataSource"> -->
-<!--         <property name="driverClassName" value="${driver}" /> -->
-<!--         <property name="url" value="${jdbc.url}" /> -->
-<!--         <property name="username" value="${jdbc.username}" /> -->
-<!--         <property name="password" value="${jdbc.password}" /> -->
-<!--  		<property name="maxWait" value="${jdbc.maxWait}" /> -->
-<!--     </bean> -->
+    <bean id="sampleDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${driver}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+ 		<property name="maxWait" value="${jdbc.maxWait}" />
+    </bean>
 
     <!-- reference mybatis config file，scan mapper dir -->
-<!--     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> -->
-<!--     	<property name="dataSource" ref="sampleDataSource"/> -->
-<!--     	<property name="mapperLocations" value="classpath:mappers/*.xml"/> -->
-<!-- 		<property name="plugins"> -->
-<!-- 		    <array> -->
-<!-- 		      <bean class="com.github.pagehelper.PageHelper"> -->
-<!-- 		        <property name="properties"> -->
-<!-- 		          <value> -->
-<!-- 		            dialect=mysql -->
-<!-- 		          </value> -->
-<!-- 		        </property> -->
-<!-- 		      </bean> -->
-<!-- 		    </array> -->
-<!-- 		</property> -->
-<!--     </bean> -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    	<property name="dataSource" ref="sampleDataSource"/>
+    	<property name="mapperLocations" value="classpath:mappers/*.xml"/>
+		<property name="plugins">
+		    <array>
+		      <bean class="com.github.pagehelper.PageHelper">
+		        <property name="properties">
+		          <value>
+		            dialect=mysql
+		          </value>
+		        </property>
+		      </bean>
+		    </array>
+		</property>
+    </bean>
 
     <!-- spring and mybatis integration，scan dao package -->
-<!--     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"> -->
-<!--     	<property name="basePackage" value="com.pmo.dashboard.dao"/> -->
-<!--     	<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property> -->
-<!--     </bean> -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    	<property name="basePackage" value="com.fallwater.testSpringMvc.dao"/>
+    	<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+    </bean>
 
     <!-- config the transaction -->  
-<!--     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">   -->
-<!--         <property name="dataSource" ref="sampleDataSource" />   -->
-<!--     </bean>   -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
+        <property name="dataSource" ref="sampleDataSource" />  
+    </bean>  
       
     <!-- 开启事务控制的注解支持 -->  
-<!--     <tx:annotation-driven transaction-manager="transactionManager"/> -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 </beans>
