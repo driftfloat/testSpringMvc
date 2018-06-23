@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fallwater.testSpringMvc.dao.AnswerMapper" >
+  <resultMap id="BaseResultMap" type="com.fallwater.testSpringMvc.entity.Answer" >
+    <id column="answer_id" property="answerId" jdbcType="INTEGER" />
+    <result column="liked_count" property="likedCount" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="question_id" property="questionId" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="question_title" property="questionTitle" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.fallwater.testSpringMvc.entity.Answer" extends="BaseResultMap" >
+    <result column="answer_content" property="answerContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    answer_id, liked_count, create_time, question_id, user_id
+  </sql>
+  <sql id="Blob_Column_List" >
+    answer_content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from answer
+    where answer_id = #{answerId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from answer
+    where answer_id = #{answerId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fallwater.testSpringMvc.entity.Answer" >
+    insert into answer (answer_id, liked_count, create_time, 
+      question_id, user_id, answer_content
+      )
+    values (#{answerId,jdbcType=INTEGER}, #{likedCount,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT}, 
+      #{questionId,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{answerContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fallwater.testSpringMvc.entity.Answer" >
+    insert into answer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="answerId != null" >
+        answer_id,
+      </if>
+      <if test="likedCount != null" >
+        liked_count,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="questionId != null" >
+        question_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="answerContent != null" >
+        answer_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="answerId != null" >
+        #{answerId,jdbcType=INTEGER},
+      </if>
+      <if test="likedCount != null" >
+        #{likedCount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="questionId != null" >
+        #{questionId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="answerContent != null" >
+        #{answerContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fallwater.testSpringMvc.entity.Answer" >
+    update answer
+    <set >
+      <if test="likedCount != null" >
+        liked_count = #{likedCount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="questionId != null" >
+        question_id = #{questionId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="answerContent != null" >
+        answer_content = #{answerContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where answer_id = #{answerId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="list" resultMap="ResultMapWithBLOBs" parameterType="int" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    , (select question_title from question where question_id= answer.question_id) question_title
+    from answer 
+    where question_id = #{questionId}
+  </select>
+</mapper>

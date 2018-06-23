@@ -11,8 +11,6 @@
             http://www.springframework.org/schema/context 
             http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 	<!-- auto inject -->
-<!-- 	<mvc:annotation-driven /> -->
-<!-- 	<mvc:view-controller path="/" view-name="index"/> -->
 	<context:component-scan base-package="com.fallwater.testSpringMvc" />
 
 	<bean id="mappingJacksonHttpMessageConverter"
@@ -67,20 +65,6 @@
 		<property name="exposeSpringMacroHelpers" value="true"/>
 		<property name="requestContextAttribute" value="rc"></property>
 	</bean>
-
-<!-- 	<bean -->
-<!-- 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"> -->
-<!-- 		<property name="viewClass" -->
-<!-- 			value="org.springframework.web.servlet.view.JstlView"></property> -->
-<!-- 		<property name="prefix" value="/"></property> -->
-<!-- 		<property name="suffix" value=".jsp"></property> -->
-<!-- 	</bean> -->
-	
-<!-- 	<bean id="multipartResolver" -->
-<!--         class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> -->
-<!--         <property name="maxUploadSize" value="10485760"/> -->
-<!--         <property name="maxInMemorySize" value="10485760" /> -->
-<!--     </bean> -->
 
     <!-- SpringMVC上传文件时，需要配置MultipartResolver处理器 -->  
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  

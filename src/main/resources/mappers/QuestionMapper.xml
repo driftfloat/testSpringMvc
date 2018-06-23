@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fallwater.testSpringMvc.dao.QuestionMapper" >
+  <resultMap id="BaseResultMap" type="com.fallwater.testSpringMvc.entity.Question" >
+    <id column="question_id" property="questionId" jdbcType="INTEGER" />
+    <result column="question_title" property="questionTitle" jdbcType="VARCHAR" />
+    <result column="topic_kv_list" property="topicKvList" jdbcType="VARCHAR" />
+    <result column="followed_count" property="followedCount" jdbcType="INTEGER" />
+    <result column="scaned_count" property="scanedCount" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.fallwater.testSpringMvc.entity.Question" extends="BaseResultMap" >
+    <result column="question_content" property="questionContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    question_id, question_title, topic_kv_list, followed_count, scaned_count, create_time, 
+    user_id
+  </sql>
+  <sql id="Blob_Column_List" >
+    question_content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from question
+    where question_id = #{questionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from question
+    where question_id = #{questionId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insertSelective" parameterType="com.fallwater.testSpringMvc.entity.Question" >
+    insert into question
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="questionId != null" >
+        question_id,
+      </if>
+      <if test="questionTitle != null" >
+        question_title,
+      </if>
+      <if test="topicKvList != null" >
+        topic_kv_list,
+      </if>
+      <if test="followedCount != null" >
+        followed_count,
+      </if>
+      <if test="scanedCount != null" >
+        scaned_count,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="questionContent != null" >
+        question_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="questionId != null" >
+        #{questionId,jdbcType=INTEGER},
+      </if>
+      <if test="questionTitle != null" >
+        #{questionTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="topicKvList != null" >
+        #{topicKvList,jdbcType=VARCHAR},
+      </if>
+      <if test="followedCount != null" >
+        #{followedCount,jdbcType=INTEGER},
+      </if>
+      <if test="scanedCount != null" >
+        #{scanedCount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="questionContent != null" >
+        #{questionContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fallwater.testSpringMvc.entity.Question" >
+    update question
+    <set >
+      <if test="questionTitle != null" >
+        question_title = #{questionTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="topicKvList != null" >
+        topic_kv_list = #{topicKvList,jdbcType=VARCHAR},
+      </if>
+      <if test="followedCount != null" >
+        followed_count = #{followedCount,jdbcType=INTEGER},
+      </if>
+      <if test="scanedCount != null" >
+        scaned_count = #{scanedCount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="questionContent != null" >
+        question_content = #{questionContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where question_id = #{questionId,jdbcType=INTEGER}
+  </update>
+  
+   <select id="list" resultMap="ResultMapWithBLOBs" parameterType="string" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from question
+  </select>
+</mapper>
