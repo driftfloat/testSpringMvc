@@ -9,7 +9,6 @@
 <title>index</title>
 </head>
 <body>
-<<<<<<< HEAD
 <h1>首页</h1>
 <a href="<%=pageContext.getServletContext().getContextPath() %>/web/add">add</a>
 <h3>登录</h3>
