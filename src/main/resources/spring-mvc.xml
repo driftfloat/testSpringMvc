@@ -35,9 +35,9 @@
 		</property>
 	</bean>
 	
-<!-- 	<mvc:interceptors>   -->
-<!-- 	    <bean class="com.fallwater.testSpringMvc.interceptor.LoginInterceptor"></bean> -->
-<!-- 	</mvc:interceptors> -->
+	<mvc:interceptors>  
+	    <bean class="com.fallwater.testSpringMvc.interceptor.LoginInterceptor"></bean>
+	</mvc:interceptors>
 
 <!-- 	<mvc:interceptors> -->
 <!-- 		<mvc:interceptor> -->

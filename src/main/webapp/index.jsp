@@ -14,5 +14,10 @@
 <a href="<c:url value='/web/toRegister.html'/>">注册用户</a>
 <br/>
 欢迎光临, ${user.username }
+<br/>
+<a href="<c:url value='/web/message/list.html'/>">消息列表</a>
+<br/>
+<a href="<c:url value='/web/message/toSend.html'/>">发送消息</a>
+
 </body>
 </html>
